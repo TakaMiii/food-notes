@@ -19,7 +19,7 @@ input:focus {
 }
 
 .p-dropdown, input {
-    @apply border-2 border-dark border-opacity-10 rounded-md p-2 text-lg
+    @apply w-full border-2 border-dark border-opacity-10 rounded-md p-2 text-lg
 }
 
 .p-dropdown-header {

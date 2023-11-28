@@ -4,10 +4,9 @@ import {useState, useEffect} from 'react';
 import {getFoodOptions} from '@/src/api/mock-api-food';
 
 export function AddRecord(props) {
-  const [item, setItem] = useState({
-    name: undefined,
-    quantity: 0,
-    unit: 'ml'
+  const [form, setForm] = useState({
+    item: {id: undefined, unit: 'ml'},
+    quantity: 0
   });
   const [foodOptions, setFoodOptions] = useState([])
 
@@ -17,17 +16,18 @@ export function AddRecord(props) {
     })
   }, [props.group.id])
 
+  const quantityOptions = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5];
   return (
-      <Dialog header={"新增" + props.group.name} visible={props.visible}
+      <Dialog header={"新增" + props.group.name + "食物"} visible={props.visible}
               onHide={() => props.hideDialog()}
       pt={{header: 'text-dark text-2xl my-3'}}>
-        <div className="my-2">
-
-          <Dropdown value={item.name}
-                    onChange={(e) => setItem({...item, name: e.value})}
+        <div className="grid gap-4 my-2">
+          <Dropdown value={form.item}
+                    onChange={(e) => setForm({...form, item: e.value })}
                     options={foodOptions} optionLabel="label" placeholder="選擇食物" filter
                     className="w-full md:w-14rem"/>
-          <p>Add a {props.group.name} item with id {props.group.id}</p>
+          <Dropdown inputId="quantity" value={form.quantity} options={quantityOptions} onChange={(e) => setForm({...form, quantity: e.value})} />
+          <label htmlFor="quantity"><span>{form.item.unit.toString()}</span></label>
         </div>
       </Dialog>
   );

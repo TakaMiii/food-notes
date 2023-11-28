@@ -1,46 +1,61 @@
-const grains:{value: string, label: string}[] = [
+type foodInfo = { value: {id: string, unit: string}, label: string };
+
+const grains:foodInfo[] = [
   {
-    value: 'rice',
+    value: {id: 'rice', unit: '碗'},
     label: '米',
   },
   {
-    value: 'noodle',
+    value: {id: 'noodle', unit: '碗'},
     label: '麵',
   },
   {
-    value: 'bread',
+    value: {id: 'bread', unit: '片'},
     label: '麵包',
   },
   {
-    value: 'wheat',
+    value: {id: 'wheat',unit: '碗'},
     label: '小麥',
-  }, {
-    value: 'corn',
+
+  },
+  {
+    value: {id: 'corn', unit: '個'},
     label: '玉米',
-  }, {
-    value: 'potato',
+  },
+  {
+    value: {id: 'potato', unit: '個'},
     label: '馬鈴薯',
-  }, {
-    value: 'sweet-potato',
+  },
+  {
+    value: {id: 'sweet-potato', unit: '個'},
     label: '蕃薯',
-  }, {
-    value: 'pumpkin',
+  },
+  {
+    value: {id: 'pumpkin', unit: '個'},
     label: '南瓜',
   },
 ];
 
-const proteins:{value: string, label: string}[] = [
+const proteins:foodInfo[] = [
   {
-    value: 'beef',
+    value: {id: 'egg', unit: '個'},
+    label: '蛋',
+  },
+  {
+    value: {id: 'beef', unit: 'g'},
     label: '牛',
   },
   {
-    value: 'pork',
+    value: {id: 'pork', unit: 'g'},
     label: '豬',
   },
   {
-    value: 'chicken',
+    value: {id:'chicken', unit: 'g'},
     label: '雞',
+  },
+  {
+    value: {id: 'duck', unit: 'g'},
+    label: '鴨',
   }
 ]
 
