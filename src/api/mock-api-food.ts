@@ -29,6 +29,21 @@ const grains:{value: string, label: string}[] = [
   },
 ];
 
+const proteins:{value: string, label: string}[] = [
+  {
+    value: 'beef',
+    label: '牛',
+  },
+  {
+    value: 'pork',
+    label: '豬',
+  },
+  {
+    value: 'chicken',
+    label: '雞',
+  }
+]
+
 function mockGrainsApi() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -37,9 +52,23 @@ function mockGrainsApi() {
   });
 }
 
-async function getGrains() {
-  const options = await mockGrainsApi() as {value: string, label: string}[];
-  return options;
+function mockProteinsApi() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(proteins);
+    }, 2000);
+  });
+}
+async function getFoodOptions(groupName:string) {
+  if(groupName === 'grain') {
+    const options = await mockGrainsApi() as {value: string, label: string}[];
+    return options
+  }
+  if(groupName === 'protein') {
+    const options = await mockProteinsApi() as {value: string, label: string}[];
+    return options
+  }
+
 }
 
-export {getGrains};
+export {getFoodOptions};
