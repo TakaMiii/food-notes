@@ -5,27 +5,27 @@ import {AddRecord} from '@/src/components/AddRecord';
 
 const foodGroup = [
   {
-    id: 1,
+    id: 'grain',
     name: '五穀根莖',
     bgColor: 'bg-amber'
   },
   {
-    id: 2,
+    id: 'protein',
     name: '蛋白質',
     bgColor: 'bg-red'
   },
   {
-    id: 3,
+    id: 'vegetable',
     name:'蔬菜',
     bgColor: 'bg-green'
   },
   {
-    id: 4,
+    id: 'fruit',
     name: '水果',
     bgColor: 'bg-yellow'
   },
   {
-    id: 5,
+    id: 'dairy',
     name: '奶、乳製品',
     bgColor: 'bg-off-white'
   },
