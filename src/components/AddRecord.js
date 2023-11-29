@@ -1,7 +1,17 @@
 import {Dialog} from 'primereact/dialog';
 import {Dropdown} from 'primereact/dropdown';
-import {useState, useEffect} from 'react';
+import { Button } from 'primereact/button';
+import {useState, useEffect, useMemo} from 'react';
 import {getFoodOptions} from '@/src/api/mock-api-food';
+import {quantitySm, quantityMd} from '@/src/js/quantity-options.js';
+
+
+const footerContent = (
+    <div>
+      <Button label="No" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+      <Button label="Yes" icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
+    </div>
+);
 
 export function AddRecord(props) {
   const [form, setForm] = useState({
@@ -16,7 +26,14 @@ export function AddRecord(props) {
     })
   }, [props.group.id])
 
-  const quantityOptions = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5];
+  const quantityOptions = useMemo(() => {
+    if(form.item.unit === '碗' || form.item.unit === '片' || form.item.unit === '個') {
+      return quantityMd;
+    }else {
+      return quantitySm;
+    }
+  }, [form.item.unit]);
+
   return (
       <Dialog header={"新增" + props.group.name + "食物"} visible={props.visible}
               onHide={() => props.hideDialog()}
@@ -27,8 +44,9 @@ export function AddRecord(props) {
                     options={foodOptions} optionLabel="label" placeholder="選擇食物" filter
                     className="w-full md:w-14rem"/>
           <Dropdown inputId="quantity" value={form.quantity} options={quantityOptions} onChange={(e) => setForm({...form, quantity: e.value})} />
-          <label htmlFor="quantity"><span>{form.item.unit.toString()}</span></label>
+            <label htmlFor="quantity" className='relative'><p className='absolute bottom-7 right-8 text-stone-400'>{form.item.unit.toString()}</p></label>
         </div>
+
       </Dialog>
   );
 }
