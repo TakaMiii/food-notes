@@ -14,12 +14,16 @@ input:focus {
     @apply border-sky-800 shadow-md shadow-violet-200 transition-all duration-500
 }
 
+.p-button {
+    @apply w-24 h-12 text-xl bg-amber text-dark font-semibold tracking-widest rounded-sm
+}
+
 .p-dialog {
     @apply bg-orange-100 w-5/6 px-4 drop-shadow-md rounded-md
 }
 
 .p-dropdown, input {
-    @apply w-full border-2 border-dark border-opacity-10 rounded-md p-2 text-lg
+    @apply w-full bg-transparent border-2 border-dark border-opacity-10 rounded-md p-2 text-lg
 }
 
 .p-dropdown-header {
@@ -28,11 +32,11 @@ input:focus {
 }
 
 
-.p-dropdown-items-wrapper {
+.p-dropdown-items-wrapper, .p-autocomplete-items{
     @apply bg-off-white text-lg
 }
 
-.p-dropdown-item {
+.p-dropdown-item, .p-autocomplete-item {
     @apply p-2.5 px-5
 }
 
@@ -46,4 +50,8 @@ input:focus {
 
 .p-dropdown-filter {
     @apply text-lg p-2 pl-8
+}
+
+.p-autocomplete > input {
+    @apply rounded-r-none
 }

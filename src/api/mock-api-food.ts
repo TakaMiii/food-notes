@@ -1,75 +1,114 @@
 type foodInfo = {
-    value: { id: string, unit: string },
+    id: string,
+    unit: string,
     label: string,
     group: string
 };
 
 const data: foodInfo[] = [
     {
-        value: {id: 'rice', unit: '碗'},
+        id: 'rice',
+        unit: '碗',
         label: '米',
         group: 'grain'
     },
     {
-        value: {id: 'noodle', unit: '碗'},
+        id: 'noodle',
+        unit: '碗',
         label: '麵',
         group: 'grain'
     },
     {
-        value: {id: 'bread', unit: '片'},
+        id: 'bread',
+        unit: '片',
         label: '麵包',
         group: 'grain'
     },
     {
-        value: {id: 'wheat', unit: '碗'},
+        id: 'wheat',
+        unit: '碗',
         label: '小麥',
-
         group: 'grain'
     },
     {
-        value: {id: 'corn', unit: '個'},
+        id: 'corn', unit: '個',
         label: '玉米',
         group: 'grain'
     },
     {
-        value: {id: 'potato', unit: '個'},
+        id: 'potato', unit: '個',
         label: '馬鈴薯',
         group: 'grain'
     },
     {
-        value: {id: 'sweet-potato', unit: '個'},
+        id: 'sweet-potato', unit: '個',
         label: '蕃薯',
         group: 'grain'
     },
     {
-        value: {id: 'pumpkin', unit: '個'},
+        id: 'pumpkin', unit: '個',
         label: '南瓜',
         group: 'grain'
     },
     {
-        value: {id: 'egg', unit: '個'},
+        id: 'egg', unit: '個',
         label: '蛋',
         group: 'protein'
     },
     {
-        value: {id: 'beef', unit: 'g'},
+        id: 'beef', unit: 'g',
         label: '牛',
         group: 'protein'
     },
     {
-        value: {id: 'pork', unit: 'g'},
+        id: 'pork', unit: 'g',
         label: '豬',
         group: 'protein'
     },
     {
-        value: {id: 'chicken', unit: 'g'},
+        id: 'chicken', unit: 'g',
         label: '雞',
         group: 'protein'
     },
     {
-        value: {id: 'duck', unit: 'g'},
+        id: 'duck', unit: 'g',
         label: '鴨',
         group: 'protein'
+    },
+    {
+        id: 'broccoli', unit: 'g',
+        label: '花椰菜',
+        group: 'vegetable'
+    },
+    {
+        id: 'cabbage', unit: 'g',
+        label: '高麗菜',
+        group: 'vegetable'
+    },
+    {
+        id: 'spinach', unit: 'g',
+        label: '菠菜',
+        group: 'vegetable'
+    },
+    {
+        id: 'tomato', unit: 'g',
+        label: '番茄',
+        group: 'vegetable'
+    },
+    {
+        id: 'apple', unit: '個',
+        label: '蘋果',
+        group: 'fruit'
+    },
+    {
+        id: 'banana', unit: '個',
+        label: '菠菜',
+        group: 'fruit'
+    },
+    {
+        id: 'orange', unit: '個',
+        label: '橘子',
+        group: 'fruit'
     }
 ];
 
@@ -92,15 +131,20 @@ function mockProteinsApi() {
     });
 }
 
-async function getFoodOptions(groupName: string) {
+async function getFoodOptionsByFoodGroup(groupName: string) {
     if (groupName === 'grain') {
         const options = await mockGrainsApi() as { value: string, label: string }[];
         return options;
-    }
-    if (groupName === 'protein') {
+    } else if (groupName === 'protein') {
         const options = await mockProteinsApi() as { value: string, label: string }[];
         return options;
     }
 }
 
-export {getFoodOptions};
+async function getFoodOptionsByFoodLabel(text: string) {
+    const options = data.filter(food => food.label.match(`${text}`));
+    return options;
+}
+
+
+export {getFoodOptionsByFoodGroup, getFoodOptionsByFoodLabel};

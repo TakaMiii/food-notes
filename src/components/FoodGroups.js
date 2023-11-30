@@ -40,8 +40,7 @@ export default function FoodGroup() {
   const [dialogOn, setDialogOn] = useState(false);
   const [currentGroup, setCurrentGroup] = useState({id: null, name: null});
 
-  function turnOnDialog(id, name){
-    setCurrentGroup({id: id, name: name});
+  function turnOnDialog(){
     setDialogOn(true);
   }
 
@@ -50,16 +49,17 @@ export default function FoodGroup() {
     setDialogOn(false);
   }
 
-  function FoodBtn(props) {
-    return(<Button className={`${props.color}`}  label={props.name} onClick={() => turnOnDialog(props.id, props.name)} />)
-  }
+  // function FoodBtn(props) {
+  //   return(<Button className={`${props.color}`}  label={props.name} onClick={() => turnOnDialog(props.id, props.name)} />)
+  // }
 
-  const groupBtns = foodGroup.map(group => <FoodBtn key={group.id} name={group.name} id={group.id} color={group.bgColor} />);
+  // const groupBtns = foodGroup.map(group => <FoodBtn key={group.id} name={group.name} id={group.id} color={group.bgColor} />);
 
   return(
       <div>
-        <div className="grid grid-cols-2 bg-amber-200">{groupBtns}</div>
-        <AddRecord visible={dialogOn} group={currentGroup} hideDialog={turnOffDialog} />
+        {/*<div className="grid grid-cols-2 bg-amber-200">{groupBtns}</div>*/}
+        <Button className="absolute bottom-2 right-2" label='新增' onClick={turnOnDialog} />
+        <AddRecord visible={dialogOn} hideDialog={turnOffDialog} />
       </div>
   )
 }
