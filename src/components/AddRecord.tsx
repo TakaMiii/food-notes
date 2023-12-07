@@ -9,15 +9,6 @@ import {
 import {quantitySm, quantityMd} from '@/src/js/quantity-options';
 import {FoodInfo} from "@/src/interfaces";
 
-// const footerContent = (
-//     <div>
-//       <Button label="No" icon="pi pi-times" onClick={() => setVisible(false)}
-//               className="p-button-text"/>
-//       <Button label="Yes" icon="pi pi-check" onClick={() => setVisible(false)}
-//               autoFocus/>
-//     </div>
-// );
-
 export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
     const initFoodItem = {
         id: null,
@@ -34,25 +25,39 @@ export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
     const [foodOptions, setFoodOptions] = useState([] as FoodInfo[]);
 
     const quantityOptions: number[] = useMemo(() => {
-        if (form.item.unit === '碗' || form.item.unit === '片' || form.item.unit === '個') {
-            return quantityMd as number[];
-        } else {
-            return quantitySm;
-        }
+        return form.item.unit === '碗' || form.item.unit === '片' || form.item.unit === '個' ? quantityMd as number[] : quantitySm;
     }, [form.item.unit]);
 
     async function searchOptions(val: string) {
-        console.log('找項目：', val);
         if (val !== '') {
             const options = await getFoodOptionsByFoodLabel(val);
             setFoodOptions(options);
         }
     }
 
+    function initForm(){
+        setForm({item: initFoodItem, quantity: 0});
+        setKeyword('');
+        setFoodOptions([]);
+    }
+
+    const footerContent = (
+        <div className="grid grid-cols-2 gap-2">
+            <Button label="Cancel" icon="pi pi-times"
+                    className="!bg-transparent border-4 border-amber !w-full"
+                    onClick={() => {props.hideDialog(); initForm()}}
+            />
+            <Button label="Save" icon="pi pi-check" className="!w-full"/>
+        </div>
+    );
+
     return (
         <Dialog header={'新增紀錄'} visible={props.visible}
                 onHide={() => props.hideDialog()}
-                pt={{header: () => ('text-dark text-2xl m-3')}}>
+                className="p-2"
+                pt={{header: () => ('text-dark text-2xl m-3')}}
+                footer={footerContent}
+        >
             <div className="grid gap-4 my-2 px-2">
                 <AutoComplete
                     value={keyword} field="label"
@@ -63,23 +68,17 @@ export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
                         } else {
                             setKeyword(e.value.label);
                         }
-                    }
-                    }
+                    }}
                     onSelect={(e) => setForm({...form, item: e.value})}
                     onBlur={() => {
                         const food = foodOptions.find((food) => {
-                            console.log('food label:', food.label);
-                            return food.label.includes(keyword)}
+                                return food.label.includes(keyword);
+                            }
                         );
-
-                        if(food) {
-                            setForm({...form, item: food});
-                            setKeyword(food.label);
-                        }else{
-                            setForm({...form, item: initFoodItem});
-                            setKeyword('');
-                        }
+                        setForm({...form, item: food || initFoodItem});
+                        setKeyword(food ? food.label : '');
                     }}
+                    autoFocus
                 />
                 <LableDropdown
                     value={form.quantity}
