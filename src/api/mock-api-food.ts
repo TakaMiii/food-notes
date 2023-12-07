@@ -1,15 +1,10 @@
-type foodInfo = {
-    id: string,
-    unit: string,
-    label: string,
-    group: string
-};
+import {FoodInfo} from "@/src/interfaces";
 
-const data: foodInfo[] = [
+const data: FoodInfo[] = [
     {
         id: 'rice',
         unit: '碗',
-        label: '米',
+        label: '米飯',
         group: 'grain'
     },
     {
@@ -57,22 +52,22 @@ const data: foodInfo[] = [
     },
     {
         id: 'beef', unit: 'g',
-        label: '牛',
+        label: '牛肉',
         group: 'protein'
     },
     {
         id: 'pork', unit: 'g',
-        label: '豬',
+        label: '豬肉',
         group: 'protein'
     },
     {
         id: 'chicken', unit: 'g',
-        label: '雞',
+        label: '雞肉',
         group: 'protein'
     },
     {
         id: 'duck', unit: 'g',
-        label: '鴨',
+        label: '鴨肉',
         group: 'protein'
     },
     {
@@ -142,7 +137,7 @@ async function getFoodOptionsByFoodGroup(groupName: string) {
 }
 
 async function getFoodOptionsByFoodLabel(text: string) {
-    const options = data.filter(food => food.label.match(`${text}`));
+    const options = data.filter(food => food.label?.match(`${text}`));
     return options;
 }
 

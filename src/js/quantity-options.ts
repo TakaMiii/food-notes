@@ -1,5 +1,5 @@
-const quantitySm = [];
-const quantityMd = [];
+const quantitySm: number[] = [];
+const quantityMd: number[] = [];
 
 for(let i=10; i<501; i+=10) {
   quantitySm.push(i);
