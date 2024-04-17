@@ -3,9 +3,8 @@ import {Button} from 'primereact/button';
 import {AutoComplete} from 'primereact/autocomplete';
 import {LableDropdown} from '@/src/components/LableDropdown';
 import {useState, useMemo} from 'react';
-import {
-    getFoodOptionsByFoodLabel,
-} from '@/src/api/mock-api-food';
+import {getFoodOptionsByFoodLabel} from '@/src/api/mock-api-food';
+import {addRecordApi} from '@/src/api/mock-records'
 import {quantitySm, quantityMd} from '@/src/js/quantity-options';
 import {FoodInfo} from "@/src/interfaces";
 
@@ -47,7 +46,7 @@ export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
                     className="!bg-transparent border-4 border-amber !w-full"
                     onClick={() => {props.hideDialog(); initForm()}}
             />
-            <Button label="Save" icon="pi pi-check" className="!w-full"/>
+            <Button label="Save" icon="pi pi-check" className="!w-full" onClick={() => addRecordApi(form.item, form.quantity)}/>
         </div>
     );
 
