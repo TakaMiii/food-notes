@@ -6,7 +6,7 @@
 }
 
 body {
-    @apply bg-dark
+    @apply bg-dark text-xl
 }
 
 input:focus, .p-dropdown:focus{
@@ -50,4 +50,16 @@ input:focus, .p-dropdown:focus{
 
 .p-dropdown-filter {
     @apply text-lg p-2 pl-8
+}
+
+.p-datatable-thead {
+    @apply text-gray-400
+}
+
+.p-datatable-thead th {
+    @apply py-5
+}
+
+.p-datatable-tbody {
+    @apply leading-10 mt-20
 }

@@ -97,7 +97,7 @@ const data: FoodInfo[] = [
     },
     {
         id: 'banana', unit: '個',
-        label: '菠菜',
+        label: '香蕉',
         group: 'fruit'
     },
     {
@@ -141,5 +141,4 @@ async function getFoodOptionsByFoodLabel(text: string) {
     return options;
 }
 
-
-export {getFoodOptionsByFoodGroup, getFoodOptionsByFoodLabel};
+export {data, getFoodOptionsByFoodGroup, getFoodOptionsByFoodLabel};

@@ -1,9 +1,9 @@
-import FoodGroups from '../components/FoodGroups'
+import AppRecords from '../components/AppRecords'
 
 export default function Home() {
   return (
     <main>
-      <FoodGroups />
+      <AppRecords />
     </main>
   )
 }

@@ -4,13 +4,13 @@ import {AutoComplete} from 'primereact/autocomplete';
 import {LableDropdown} from '@/src/components/LableDropdown';
 import {useState, useMemo} from 'react';
 import {getFoodOptionsByFoodLabel} from '@/src/api/mock-api-food';
-import {addRecordApi} from '@/src/api/mock-records'
+import {addRecordApi, getRecords} from '@/src/api/mock-records';
 import {quantitySm, quantityMd} from '@/src/js/quantity-options';
 import {FoodInfo} from "@/src/interfaces";
 
-export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
+export function AddRecord(props: { visible: boolean, hideDialog: () => {}, getRecords: (records: any[]) => {} }) {
     const initFoodItem = {
-        id: null,
+        id: '',
         unit: 'ml',
         label: '',
         group: null,
@@ -40,13 +40,20 @@ export function AddRecord(props: { visible: boolean, hideDialog: () => {} }) {
         setFoodOptions([]);
     }
 
+    async function saveRecord() {
+        const result = await addRecordApi(form.item, form.quantity);
+        if(result === 'success') {
+            props.getRecords(getRecords());
+        }
+    }
+
     const footerContent = (
         <div className="grid grid-cols-2 gap-2">
             <Button label="Cancel" icon="pi pi-times"
                     className="!bg-transparent border-4 border-amber !w-full"
                     onClick={() => {props.hideDialog(); initForm()}}
             />
-            <Button label="Save" icon="pi pi-check" className="!w-full" onClick={() => addRecordApi(form.item, form.quantity)}/>
+            <Button label="Save" icon="pi pi-check" className="!w-full" onClick={() => saveRecord()}/>
         </div>
     );
 

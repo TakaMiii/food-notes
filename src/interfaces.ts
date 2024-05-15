@@ -1,5 +1,5 @@
 interface FoodInfo {
-    id: string | null,
+    id: string,
     unit: string,
     label: string,
     group: string | null
